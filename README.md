@@ -26,7 +26,7 @@ ln -s ../Laravel-Quasar/dist/spa public_html
 ```bash
  cd api.example.com
  rm -rf public_html
- ln -s ../Laravel-Quasar/public public_html
+ ln -s ../Laravel-Quasar/public-api public_html
 ```
 ---
 ![Screenshot](https://github.com/HansSchouten/Laravel-Quasar/assets/5946444/96939012-309c-4817-a124-0f26e24f627e)
