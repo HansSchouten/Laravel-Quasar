@@ -1,0 +1,51 @@
+{
+  "Go back home": {
+    "nl": "Naar start"
+  },
+  "Oops, this page cannot be found": {
+    "nl": "Oops, deze pagina kan niet worden gevonden"
+  },
+
+  "Register": {
+    "nl": "Registreer"
+  },
+  "Name": {
+    "nl": "Naam"
+  },
+  "Email": {
+    "nl": "E-mailadres"
+  },
+  "Password": {
+    "nl": "Wachtwoord"
+  },
+  "Confirm Password": {
+    "nl": "Wachtwoord bevestiging"
+  },
+
+  "Login": {
+    "nl": "Inloggen"
+  },
+  "Remember Me": {
+    "nl": "Mij onthouden"
+  },
+  "Forgot Your Password?": {
+    "nl": "Wachtwoord vergeten?"
+  },
+  "No account? Click here to register": {
+    "nl": "Geen account? Klik hier om te registreren"
+  },
+
+  "Reset Password": {
+    "nl": "Wachtwoord opnieuw instellen"
+  },
+  "Send Password Reset Link": {
+    "nl": "Nieuw wachtwoord aanvragen"
+  },
+
+  "Settings": {
+    "nl": "Instellingen"
+  },
+  "Logout": {
+    "nl": "Uitloggen"
+  }
+}
