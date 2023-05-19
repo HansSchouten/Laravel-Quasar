@@ -21,8 +21,8 @@ This boilerplate offers a quick start for building a Material Design (web)app wi
 cd example.com
 rm -rf public_html
 ln -s ../Laravel-Quasar/dist/spa public_html
- ```
-- symlink `api.example.com` to the Laravel public folder:
+```
+- symlink `api.example.com` to the Laravel entrypoint:
 ```bash
  cd api.example.com
  rm -rf public_html

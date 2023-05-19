@@ -65,6 +65,7 @@
 <script>
 import { defineComponent } from "vue";
 import Form from 'vform'
+import { useAuthStore } from 'stores/auth'
 
 export default defineComponent({
   middleware: 'guest',
@@ -82,20 +83,12 @@ export default defineComponent({
 
   methods: {
     async register() {
-      // Register the user.
-      const {data} = await this.form.post('/api/register')
-
-      // Log in the user.
+      await this.form.post('/api/register')
+      const authStore = useAuthStore()
       const {data: {token}} = await this.form.post('/api/login')
-
-      // Save the token.
-      this.$store.dispatch('auth/saveToken', {token})
-
-      // Update the user.
-      await this.$store.dispatch('auth/updateUser', {user: data})
-
-      // Redirect dashboard.
-      this.$router.push({name: 'dashboard'})
+      authStore.saveToken(token)
+      await authStore.fetchUser()
+      await this.$router.push({name: 'dashboard'})
     }
   }
 })
