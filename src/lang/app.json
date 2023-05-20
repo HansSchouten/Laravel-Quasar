@@ -47,5 +47,21 @@
   },
   "Logout": {
     "nl": "Uitloggen"
+  },
+
+  "Personal information": {
+    "nl": "Mijn gegevens"
+  },
+  "Information updated": {
+    "nl": "Gegevens bijgewerkt"
+  },
+  "Password updated": {
+    "nl": "Wachtwoord bijgewerkt"
+  },
+  "New password": {
+    "nl": "Nieuw wachtwoord"
+  },
+  "Update": {
+    "nl": "Bijwerken"
   }
 }

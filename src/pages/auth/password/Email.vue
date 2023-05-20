@@ -58,9 +58,7 @@ export default {
   methods: {
     async send () {
       const { data } = await this.form.post('/api/password/email')
-
       this.status = data.status
-
       this.form.reset()
     }
   }

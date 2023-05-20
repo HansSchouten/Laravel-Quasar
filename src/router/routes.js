@@ -3,6 +3,7 @@ const Register = () => import('pages/auth/Register.vue')
 const PasswordEmail = () => import('pages/auth/password/Email.vue')
 const PasswordReset = () => import('pages/auth/password/Reset.vue')
 const Dashboard = () => import('pages/Dashboard.vue')
+const SettingsProfile = () => import('pages/settings/profile/Index.vue')
 const NotFound = () => import('pages/NotFound.vue')
 
 const routes = [
@@ -12,6 +13,7 @@ const routes = [
   { path: '/password/reset/:token', name: 'password.reset', component: PasswordReset },
 
   { path: '/', name: 'dashboard', component: Dashboard },
+  { path: '/settings', name: 'settings.profile', component: SettingsProfile },
 
   { path: '/:catchAll(.*)*', component: NotFound }
 ]
