@@ -50,15 +50,6 @@ export default route(function (/* { store, ssrContext } */) {
       return next()
     }
 
-    /*
-    // Start the loading bar.
-    if (components[components.length - 1].loading !== false) {
-      console.log(Router.app.component.$loading);
-      setTimeout(() => Router.app.$loading.start())
-      Router.app.$nextTick(() => Router.app.$loading.start())
-    }
-    */
-
     const middleware = getMiddleware(components)
 
     // Call each middleware.

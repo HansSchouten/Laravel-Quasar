@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <loading ref="loading" />
+    <q-ajax-bar />
 
     <div v-if="layout" :id="'layout-' + layout">
       <component :is="layoutComponents[layout]">
@@ -12,8 +12,6 @@
 
 <script>
 import { defineComponent } from 'vue'
-import { LoadingBar } from 'quasar'
-import Loading from './components/Loading.vue'
 import { useLayoutStore } from 'stores/layout'
 
 // Load all layouts
@@ -31,10 +29,6 @@ export default defineComponent({
   el: '#app',
   name: 'App',
 
-  components: {
-    Loading,
-  },
-
   data: () => ({
     layout: 'loading', // set null to disable loading screen
     layoutComponents: layoutComponents,
@@ -42,18 +36,10 @@ export default defineComponent({
   }),
 
   created() {
-    LoadingBar.setDefaults({
-      size: '0px',
-    })
-
     const layoutStore = useLayoutStore()
     layoutStore.$subscribe((mutation, state) => {
       this.setLayout(state.layout)
     })
-  },
-
-  mounted() {
-    this.$loading = this.$refs.loading
   },
 
   methods: {
