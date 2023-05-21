@@ -36,7 +36,7 @@ export default defineComponent({
   },
 
   data: () => ({
-    layout: null,
+    layout: 'loading', // set null to disable loading screen
     layoutComponents: layoutComponents,
     defaultLayout: 'admin',
   }),
