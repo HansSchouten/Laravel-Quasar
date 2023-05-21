@@ -3,10 +3,8 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue'
-
-export default defineComponent({
+export default {
   middleware: 'auth',
   title: 'Dashboard',
-})
+}
 </script>

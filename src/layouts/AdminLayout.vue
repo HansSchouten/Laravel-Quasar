@@ -62,33 +62,25 @@
   </q-layout>
 </template>
 
-<script>
-import { defineComponent, ref } from 'vue'
+<script setup>
 import { useAuthStore } from 'stores/auth'
 import { useRouter } from 'vue-router'
+import { storeToRefs } from 'pinia'
+import { ref } from 'vue'
 
-export default defineComponent({
-  name: 'AdminLayout',
+const router = useRouter()
+const appName = window.appName
+const leftDrawerOpen = ref(false)
 
-  setup() {
-    const leftDrawerOpen = ref(false)
+const authStore = useAuthStore()
+const { user } = storeToRefs(authStore)
 
-    const authStore = useAuthStore()
-    const router = useRouter()
+function toggleLeftDrawer() {
+  leftDrawerOpen.value = !leftDrawerOpen.value
+}
 
-    return {
-      appName: window.appName,
-      user: authStore.user,
-      leftDrawerOpen,
-
-      toggleLeftDrawer() {
-        leftDrawerOpen.value = !leftDrawerOpen.value
-      },
-      async logout() {
-        await authStore.logout()
-        await router.push({ name: 'login' })
-      },
-    }
-  },
-})
+async function logout() {
+  await authStore.logout()
+  await router.push({ name: 'login' })
+}
 </script>

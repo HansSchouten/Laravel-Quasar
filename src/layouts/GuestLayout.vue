@@ -19,16 +19,6 @@
   </q-layout>
 </template>
 
-<script>
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  name: 'GuestLayout',
-
-  setup() {
-    return {
-      appName: window.appName,
-    }
-  },
-})
+<script setup>
+const appName = window.appName
 </script>

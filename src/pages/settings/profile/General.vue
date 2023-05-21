@@ -55,31 +55,29 @@
   </div>
 </template>
 
-<script>
+<script setup>
+import { onBeforeMount } from 'vue'
 import Form from 'vform'
 import { useAuthStore } from 'stores/auth'
 
-export default {
-  data: () => ({
-    form: new Form({
-      name: '',
-      email: '',
-    }),
-  }),
+const form = new Form({
+  name: '',
+  email: '',
+})
 
-  created() {
-    const authStore = useAuthStore()
-    this.form.keys().forEach((key) => {
-      this.form[key] = authStore.user[key]
-    })
-  },
+onBeforeMount(() => {
+  const authStore = useAuthStore()
+  if (!authStore.user) {
+    return
+  }
+  form.keys().forEach((key) => {
+    form[key] = authStore.user[key]
+  })
+})
 
-  methods: {
-    async update() {
-      const { data } = await this.form.patch('/api/settings/profile')
-      const authStore = useAuthStore()
-      authStore.updateUser(data)
-    },
-  },
+async function update() {
+  const { data } = await form.patch('/api/settings/profile')
+  const authStore = useAuthStore()
+  authStore.updateUser(data)
 }
 </script>
