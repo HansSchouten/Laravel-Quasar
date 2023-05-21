@@ -7,6 +7,15 @@ a {
   color: inherit;
 }
 
+.swal2-styled.swal2-confirm {
+  background-color: $primary !important;
+  padding: .625em 1.25em;
+
+  &:focus {
+    box-shadow: 0 0 0 3px rgba($primary, .5) !important;
+  }
+}
+
 #layout-loading {
   .q-toolbar__title {
     flex: initial;

@@ -2,7 +2,6 @@ import { boot } from 'quasar/wrappers'
 import axios from 'axios'
 import { useAuthStore } from 'stores/auth'
 import { useLangStore } from 'stores/lang'
-import Swal from 'sweetalert2'
 
 export default boot(async ({ app, router, store }) => {
   axios.defaults.baseURL = import.meta.env.VITE_API_URL
@@ -32,25 +31,21 @@ export default boot(async ({ app, router, store }) => {
       const { status } = error.response
 
       if (status >= 500) {
-        Swal.fire({
+        swal.fire({
           type: 'error',
           title: $t('An error occurred'),
-          text: $t('Something went wrong! Please try again or contact us.'),
-          reverseButtons: true,
-          confirmButtonText: $t('ok'),
-          cancelButtonText: $t('cancel'),
+          html: $t('Something went wrong!<br>Please try again or contact us.'),
+          confirmButtonText: $t('Ok')
         })
       }
 
       const authStore = useAuthStore()
       if (status === 401 && authStore.check) {
-        Swal.fire({
+        swal.fire({
           type: 'warning',
           title: $t('Session Expired'),
           text: $t('Please log in again to continue.'),
-          reverseButtons: true,
           confirmButtonText: $t('Ok'),
-          cancelButtonText: $t('Cancel'),
         }).then(async () => {
           await authStore.logout()
           await router.push({ name: 'login' })
