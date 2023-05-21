@@ -6,9 +6,13 @@ export default boot(async ({ app, router, store }) => {
   const mainLocale = 'en'
   let messages = {}
   messages[mainLocale] = {}
-  const translations = await import('../lang/app.json').then(
+  const authTranslations = await import('../lang/auth.json').then(
     (m) => m.default || m
   )
+  const appTranslations = await import('../lang/app.json').then(
+    (m) => m.default || m
+  )
+  let translations = { ...authTranslations, ...appTranslations }
   Object.keys(translations).forEach((englishTranslation) => {
     messages[mainLocale][englishTranslation] = englishTranslation
     Object.keys(translations[englishTranslation]).forEach((locale) => {
