@@ -27,7 +27,10 @@ export default {
       let serverMessage = this.form.errors.get(this.field)
       let fieldNameCapitalized = this.field.charAt(0).toUpperCase() + this.field.slice(1)
       let fieldNameTranslation = this.$t(fieldNameCapitalized).toLowerCase()
-      return serverMessage.replace(this.field, "'" + fieldNameTranslation + "'")
+      if (fieldNameTranslation.indexOf(' ') >= 0) {
+        fieldNameTranslation = '"' + fieldNameTranslation + '"'
+      }
+      return serverMessage.replace(this.field, fieldNameTranslation)
     },
   },
 }

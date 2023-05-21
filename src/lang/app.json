@@ -61,6 +61,9 @@
   "Cancel": {
     "nl": "Annuleren"
   },
+  "Dismiss": {
+    "nl": "Sluiten"
+  },
   "An error occurred": {
     "nl": "Er is een fout opgetreden"
   },
@@ -75,7 +78,7 @@
     "nl": "Gegevens bijgewerkt"
   },
   "Password updated": {
-    "nl": "Wachtwoord bijgewerkt"
+    "nl": "Wachtwoord gewijzigd"
   },
   "New password": {
     "nl": "Nieuw wachtwoord"
