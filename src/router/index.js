@@ -69,8 +69,7 @@ export default route(function (/* { store, ssrContext } */) {
         layoutStore.setLayout(components[0].layout || '')
       }
       if (components[0].title) {
-        document.title =
-          window.i18n.global.t(components[0].title) + ' · ' + window.appName
+        document.title = $t(components[0].title) + ' · ' + window.appName
       } else {
         document.title = window.appName
       }

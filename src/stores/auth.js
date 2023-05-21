@@ -36,6 +36,7 @@ export const useAuthStore = defineStore('auth', {
       try {
         await axios.post('/api/logout')
       } catch (e) {}
+
       this.user = null
       this.token = null
       Cookies.remove('token')

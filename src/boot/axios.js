@@ -2,8 +2,7 @@ import { boot } from 'quasar/wrappers'
 import axios from 'axios'
 import { useAuthStore } from 'stores/auth'
 import { useLangStore } from 'stores/lang'
-// import swal from 'sweetalert2'
-// import i18n from '~/plugins/i18n'
+import Swal from 'sweetalert2'
 
 export default boot(async ({ app, router, store }) => {
   axios.defaults.baseURL = import.meta.env.VITE_API_URL
@@ -25,38 +24,40 @@ export default boot(async ({ app, router, store }) => {
     return request
   })
 
-  /*
   // Response interceptor
-  axios.interceptors.response.use(response => response, error => {
-    const {status} = error.response
+  axios.interceptors.response.use(
+    (response) => response,
+    (error) => {
+      if (!error.response) return
+      const { status } = error.response
 
-    if (status >= 500) {
-      swal({
-        type: 'error',
-        title: i18n.t('error_alert_title'),
-        text: i18n.t('error_alert_text'),
-        reverseButtons: true,
-        confirmButtonText: i18n.t('ok'),
-        cancelButtonText: i18n.t('cancel')
-      })
+      if (status >= 500) {
+        Swal.fire({
+          type: 'error',
+          title: $t('An error occurred'),
+          text: $t('Something went wrong! Please try again or contact us.'),
+          reverseButtons: true,
+          confirmButtonText: $t('ok'),
+          cancelButtonText: $t('cancel'),
+        })
+      }
+
+      const authStore = useAuthStore()
+      if (status === 401 && authStore.check) {
+        Swal.fire({
+          type: 'warning',
+          title: $t('Session Expired'),
+          text: $t('Please log in again to continue.'),
+          reverseButtons: true,
+          confirmButtonText: $t('Ok'),
+          cancelButtonText: $t('Cancel'),
+        }).then(async () => {
+          await authStore.logout()
+          await router.push({ name: 'login' })
+        })
+      }
+
+      return Promise.reject(error)
     }
-
-    if (status === 401 && store.getters['auth/check']) {
-      swal({
-        type: 'warning',
-        title: i18n.t('token_expired_alert_title'),
-        text: i18n.t('token_expired_alert_text'),
-        reverseButtons: true,
-        confirmButtonText: i18n.t('ok'),
-        cancelButtonText: i18n.t('cancel')
-      }).then(() => {
-        store.commit('auth/LOGOUT')
-
-        router.push({name: 'login'})
-      })
-    }
-
-    return Promise.reject(error)
-  })
-   */
+  )
 })

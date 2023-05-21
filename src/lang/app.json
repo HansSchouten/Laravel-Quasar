@@ -49,6 +49,25 @@
     "nl": "Uitloggen"
   },
 
+  "Session Expired": {
+    "nl": "Sessie verlopen"
+  },
+  "Please log in again to continue.": {
+    "nl": "Log opnieuw in om verder te gaan."
+  },
+  "Ok": {
+    "nl": "Ok"
+  },
+  "Cancel": {
+    "nl": "Annuleren"
+  },
+  "An error occurred": {
+    "nl": "Er is een fout opgetreden"
+  },
+  "Something went wrong! Please try again or contact us.": {
+    "nl": "Er is iets misgegaan! Probeer opnieuw of neem contact met ons op."
+  },
+
   "Personal information": {
     "nl": "Mijn gegevens"
   },

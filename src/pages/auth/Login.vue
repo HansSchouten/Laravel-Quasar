@@ -83,32 +83,35 @@
   </div>
 </template>
 
-<script>
-import { defineComponent } from 'vue'
+<script setup>
+import { reactive, ref } from "vue"
 import Form from 'vform'
 import { useAuthStore } from 'stores/auth'
+import { useRouter } from "vue-router"
 
-export default defineComponent({
+const router = useRouter()
+const remember = ref(true)
+
+const form = reactive(
+  new Form({
+    email: '',
+    password: '',
+  })
+)
+
+async function login() {
+  const { data } = await form.post('/api/login')
+  const authStore = useAuthStore()
+  authStore.saveToken(data.token, remember.value)
+  await authStore.fetchUser()
+  await router.push({ name: 'dashboard' })
+}
+</script>
+
+<script>
+export default {
   middleware: 'guest',
   layout: 'guest',
   title: 'Login',
-
-  data: () => ({
-    form: new Form({
-      email: '',
-      password: '',
-    }),
-    remember: true,
-  }),
-
-  methods: {
-    async login() {
-      const { data } = await this.form.post('/api/login')
-      const authStore = useAuthStore()
-      authStore.saveToken(data.token, this.remember)
-      await authStore.fetchUser()
-      await this.$router.push({ name: 'dashboard' })
-    },
-  },
-})
+}
 </script>

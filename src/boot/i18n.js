@@ -28,5 +28,9 @@ export default boot(async ({ app, router, store }) => {
     messages: messages,
   })
 
+  window.$t = (key, ...params) => {
+    return window.i18n.global.t(key, ...params)
+  }
+
   app.use(i18n)
 })

@@ -56,20 +56,20 @@
 </template>
 
 <script setup>
-import { onBeforeMount } from 'vue'
+import { onBeforeMount, reactive } from 'vue'
 import Form from 'vform'
 import { useAuthStore } from 'stores/auth'
 
-const form = new Form({
-  name: '',
-  email: '',
-})
+const form = reactive(
+  new Form({
+    name: '',
+    email: '',
+  })
+)
 
 onBeforeMount(() => {
   const authStore = useAuthStore()
-  if (!authStore.user) {
-    return
-  }
+  if (!authStore.user) return
   form.keys().forEach((key) => {
     form[key] = authStore.user[key]
   })
