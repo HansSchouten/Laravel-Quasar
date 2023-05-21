@@ -29,4 +29,6 @@ ln -s ../Laravel-Quasar/dist/spa public_html
  ln -s ../Laravel-Quasar/public-api public_html
 ```
 ---
-![Screenshot](https://github.com/HansSchouten/Laravel-Quasar/assets/5946444/96939012-309c-4817-a124-0f26e24f627e)
+![Login screen](https://github.com/HansSchouten/Laravel-Quasar/assets/5946444/96939012-309c-4817-a124-0f26e24f627e)
+
+![Profile settings](https://github.com/HansSchouten/Laravel-Quasar/assets/5946444/cddad96f-7e70-4b3c-ad59-1007c979c294)
