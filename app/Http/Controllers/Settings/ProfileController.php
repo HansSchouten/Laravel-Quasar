@@ -19,7 +19,7 @@ class ProfileController extends Controller
 
         $this->validate($request, [
             'name' => 'required',
-            'email' => 'required|email|unique:users,email,'.$user->id,
+            'email' => 'required|email|unique:users,email,' . $user->id,
         ]);
 
         return tap($user)->update($request->only('name', 'email'));

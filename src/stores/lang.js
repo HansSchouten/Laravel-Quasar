@@ -1,11 +1,10 @@
-import {defineStore} from 'pinia'
+import { defineStore } from 'pinia'
 import Cookies from 'js-cookie'
 
 export const useLangStore = defineStore('lang', {
-
   state: () => ({
     locale: Cookies.get('locale'),
-    locales: []
+    locales: [],
   }),
 
   actions: {
@@ -19,7 +18,7 @@ export const useLangStore = defineStore('lang', {
     },
 
     setInitialLocale() {
-      if (! this.locale) {
+      if (!this.locale) {
         const browserLang = navigator.language.split('-')[0]
         if (this.locales.includes(browserLang)) {
           this.setLocale(browserLang)
@@ -28,5 +27,5 @@ export const useLangStore = defineStore('lang', {
         }
       }
     },
-  }
+  },
 })

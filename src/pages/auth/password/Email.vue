@@ -1,7 +1,7 @@
 <template>
   <div class="q-pa-md q-mt-lg">
     <div class="row justify-center">
-      <div class="col-12" style="max-width: 500px;">
+      <div class="col-12" style="max-width: 500px">
         <q-card>
           <q-card-section>
             <div class="text-h6">
@@ -12,13 +12,18 @@
           <q-separator />
 
           <form @submit.prevent="send" @keydown="form.onKeydown($event)">
-            <alert-success :form="form" :message="status"/>
+            <alert-success :form="form" :message="status" />
 
             <div class="q-pa-lg">
               <div class="col-12 q-pb-lg q-mb-sm">
                 <div class="q-pl-xs q-pr-xs">
-                  <q-input v-model="form.email" type="email" bottom-slots
-                           :label="$t('Email')" :error="form.errors.has('email')">
+                  <q-input
+                    v-model="form.email"
+                    type="email"
+                    bottom-slots
+                    :label="$t('Email')"
+                    :error="form.errors.has('email')"
+                  >
                     <template v-slot:error>
                       <has-error :form="form" field="email" />
                     </template>
@@ -27,15 +32,17 @@
               </div>
 
               <div class="col-12">
-                <q-btn type="submit" color="primary"
-                       :label="$t('Send Password Reset Link')" :loading="form.busy" />
+                <q-btn
+                  type="submit"
+                  color="primary"
+                  :label="$t('Send Password Reset Link')"
+                  :loading="form.busy"
+                />
               </div>
             </div>
-
           </form>
         </q-card>
       </div>
-
     </div>
   </div>
 </template>
@@ -51,16 +58,16 @@ export default {
   data: () => ({
     status: '',
     form: new Form({
-      email: ''
-    })
+      email: '',
+    }),
   }),
 
   methods: {
-    async send () {
+    async send() {
       const { data } = await this.form.post('/api/password/email')
       this.status = data.status
       this.form.reset()
-    }
-  }
+    },
+  },
 }
 </script>

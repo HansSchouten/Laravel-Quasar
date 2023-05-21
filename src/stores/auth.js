@@ -1,16 +1,15 @@
-import {defineStore} from 'pinia'
+import { defineStore } from 'pinia'
 import axios from 'axios'
 import Cookies from 'js-cookie'
 
 export const useAuthStore = defineStore('auth', {
-
   state: () => ({
     user: null,
-    token: Cookies.get('token')
+    token: Cookies.get('token'),
   }),
 
   getters: {
-    check: state => state.user !== null
+    check: (state) => state.user !== null,
   },
 
   actions: {
@@ -36,11 +35,10 @@ export const useAuthStore = defineStore('auth', {
     async logout() {
       try {
         await axios.post('/api/logout')
-      } catch (e) {
-      }
+      } catch (e) {}
       this.user = null
       this.token = null
       Cookies.remove('token')
-    }
-  }
+    },
+  },
 })

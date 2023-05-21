@@ -1,17 +1,15 @@
-import {boot} from 'quasar/wrappers'
+import { boot } from 'quasar/wrappers'
 import axios from 'axios'
 import { useAuthStore } from 'stores/auth'
 import { useLangStore } from 'stores/lang'
 // import swal from 'sweetalert2'
 // import i18n from '~/plugins/i18n'
 
-export default boot(async ({app, router, store}) => {
-
+export default boot(async ({ app, router, store }) => {
   axios.defaults.baseURL = import.meta.env.VITE_API_URL
 
   // Request interceptor
-  axios.interceptors.request.use(request => {
-
+  axios.interceptors.request.use((request) => {
     const authStore = useAuthStore()
     if (authStore.token) {
       request.headers['Authorization'] = `Bearer ${authStore.token}`
@@ -61,5 +59,4 @@ export default boot(async ({app, router, store}) => {
     return Promise.reject(error)
   })
    */
-
 })

@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <loading ref="loading"/>
+    <loading ref="loading" />
 
     <div v-if="layout" :id="'layout-' + layout">
       <component :is="layoutComponents[layout]">
@@ -19,13 +19,13 @@ import { useLayoutStore } from 'stores/layout'
 // Load all layouts
 const layoutFiles = import.meta.glob('./layouts/*.vue')
 let layoutComponents = {}
-Object.keys(layoutFiles).forEach(file => {
+Object.keys(layoutFiles).forEach((file) => {
   let name = file.replace(/(\.vue$)/g, '').replace(/^.*[\\\/]/, '')
   name = name.toLowerCase().replace('layout', '')
   layoutFiles[file]().then((module) => {
     layoutComponents[name] = module.default
   })
-});
+})
 
 export default defineComponent({
   el: '#app',
@@ -38,12 +38,12 @@ export default defineComponent({
   data: () => ({
     layout: null,
     layoutComponents: layoutComponents,
-    defaultLayout: 'admin'
+    defaultLayout: 'admin',
   }),
 
   created() {
     LoadingBar.setDefaults({
-      size: '0px'
+      size: '0px',
     })
 
     const layoutStore = useLayoutStore()
@@ -52,17 +52,17 @@ export default defineComponent({
     })
   },
 
-  mounted () {
+  mounted() {
     this.$loading = this.$refs.loading
   },
 
   methods: {
-    setLayout (layout) {
+    setLayout(layout) {
       if (!layout || !layoutComponents[layout]) {
         layout = this.defaultLayout
       }
       this.layout = layout
-    }
-  }
+    },
+  },
 })
 </script>

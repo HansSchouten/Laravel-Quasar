@@ -6,7 +6,7 @@ export default async (to, from, next) => {
   if (!authStore.check && authStore.token) {
     try {
       await authStore.fetchUser()
-    } catch (e) { }
+    } catch (e) {}
   }
   next()
 }

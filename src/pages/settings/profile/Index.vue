@@ -1,7 +1,7 @@
 <template>
   <div>
-    <general/>
-    <password/>
+    <general />
+    <password />
   </div>
 </template>
 
@@ -12,6 +12,6 @@ import Password from './Password.vue'
 export default {
   components: { Password, General },
   middleware: 'auth',
-  title: 'Settings'
+  title: 'Settings',
 }
 </script>

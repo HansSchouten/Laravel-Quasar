@@ -1,5 +1,10 @@
 import { route } from 'quasar/wrappers'
-import { createRouter, createMemoryHistory, createWebHistory, createWebHashHistory } from 'vue-router'
+import {
+  createRouter,
+  createMemoryHistory,
+  createWebHistory,
+  createWebHashHistory,
+} from 'vue-router'
 import routes from './routes'
 import { useLayoutStore } from 'stores/layout'
 
@@ -14,7 +19,9 @@ const routeMiddleware = resolveMiddleware(
 export default route(function (/* { store, ssrContext } */) {
   const createHistory = process.env.SERVER
     ? createMemoryHistory
-    : (process.env.VUE_ROUTER_MODE === 'history' ? createWebHistory : createWebHashHistory)
+    : process.env.VUE_ROUTER_MODE === 'history'
+    ? createWebHistory
+    : createWebHashHistory
 
   const Router = createRouter({
     scrollBehavior: () => ({ left: 0, top: 0 }),
@@ -23,18 +30,20 @@ export default route(function (/* { store, ssrContext } */) {
     // Leave this as is and make changes in quasar.conf.js instead!
     // quasar.conf.js -> build -> vueRouterMode
     // quasar.conf.js -> build -> publicPath
-    history: createHistory(process.env.VUE_ROUTER_BASE)
+    history: createHistory(process.env.VUE_ROUTER_BASE),
   })
 
   Router.beforeEach(beforeEach)
   Router.afterEach(afterEach)
 
-  async function beforeEach (to, from, next) {
-    let components = await resolveComponents(to.matched.flatMap(record => {
-      return Object.values(record.components);
-    }))
-    components = components.flatMap(component => {
-      return component.default ? component.default : component;
+  async function beforeEach(to, from, next) {
+    let components = await resolveComponents(
+      to.matched.flatMap((record) => {
+        return Object.values(record.components)
+      })
+    )
+    components = components.flatMap((component) => {
+      return component.default ? component.default : component
     })
 
     if (components.length === 0) {
@@ -60,19 +69,19 @@ export default route(function (/* { store, ssrContext } */) {
         layoutStore.setLayout(components[0].layout || '')
       }
       if (components[0].title) {
-        document.title = window.i18n.global.t(components[0].title) + " · " + window.appName;
+        document.title =
+          window.i18n.global.t(components[0].title) + ' · ' + window.appName
       } else {
-        document.title = window.appName;
+        document.title = window.appName
       }
 
       next(...args)
     })
   }
 
-  async function afterEach (to, from, next) {
-  }
+  async function afterEach(to, from, next) {}
 
-  async function callMiddleware (middleware, to, from, next) {
+  async function callMiddleware(middleware, to, from, next) {
     const stack = middleware.reverse()
 
     const _next = async (...args) => {
@@ -99,33 +108,37 @@ export default route(function (/* { store, ssrContext } */) {
     await _next()
   }
 
-  function resolveComponents (components) {
-    return Promise.all(components.map(component => {
-      return typeof component === 'function' ? component() : component
-    }))
+  function resolveComponents(components) {
+    return Promise.all(
+      components.map((component) => {
+        return typeof component === 'function' ? component() : component
+      })
+    )
   }
 
-  function getMiddleware (components) {
+  function getMiddleware(components) {
     const middleware = [...globalMiddleware]
-    components.filter(c => c.middleware).forEach(component => {
-      if (Array.isArray(component.middleware)) {
-        middleware.push(...component.middleware)
-      } else {
-        middleware.push(component.middleware)
-      }
-    })
+    components
+      .filter((c) => c.middleware)
+      .forEach((component) => {
+        if (Array.isArray(component.middleware)) {
+          middleware.push(...component.middleware)
+        } else {
+          middleware.push(component.middleware)
+        }
+      })
     return middleware
   }
 
   return Router
 })
 
-function resolveMiddleware (requireContext) {
-  return requireContext.keys()
-    .map(file =>
-      [file.replace(/(^.\/)|(\.js$)/g, ''), requireContext(file)]
+function resolveMiddleware(requireContext) {
+  return requireContext
+    .keys()
+    .map((file) => [file.replace(/(^.\/)|(\.js$)/g, ''), requireContext(file)])
+    .reduce(
+      (guards, [name, guard]) => ({ ...guards, [name]: guard.default }),
+      {}
     )
-    .reduce((guards, [name, guard]) => (
-      { ...guards, [name]: guard.default }
-    ), {})
 }

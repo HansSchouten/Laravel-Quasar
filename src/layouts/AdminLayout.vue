@@ -13,19 +13,23 @@
 
         <q-btn flat no-caps stretch :to="{ name: 'dashboard' }" class="q-ml-sm">
           <q-avatar>
-            <img src="/logo.png">
+            <img src="/logo.png" />
           </q-avatar>
           <q-toolbar-title>
             {{ appName }}
           </q-toolbar-title>
         </q-btn>
 
-        <q-space/>
+        <q-space />
 
         <div class="self-stretch row no-wrap" v-if="user">
           <q-btn-dropdown flat no-caps stretch :label="user.name">
             <q-list>
-              <q-item clickable v-close-popup :to="{ name: 'settings.profile' }">
+              <q-item
+                clickable
+                v-close-popup
+                :to="{ name: 'settings.profile' }"
+              >
                 <q-item-section>
                   <q-item-label>
                     {{ $t('Settings') }}
@@ -46,16 +50,9 @@
       </q-toolbar>
     </q-header>
 
-    <q-drawer
-      v-model="leftDrawerOpen"
-      show-if-above
-      bordered
-    >
+    <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
       <q-list>
-        <q-item-label
-          header
-        >
-        </q-item-label>
+        <q-item-label header></q-item-label>
       </q-list>
     </q-drawer>
 
@@ -68,12 +65,12 @@
 <script>
 import { defineComponent, ref } from 'vue'
 import { useAuthStore } from 'stores/auth'
-import {useRouter} from "vue-router";
+import { useRouter } from 'vue-router'
 
 export default defineComponent({
   name: 'AdminLayout',
 
-  setup () {
+  setup() {
     const leftDrawerOpen = ref(false)
 
     const authStore = useAuthStore()
@@ -84,14 +81,14 @@ export default defineComponent({
       user: authStore.user,
       leftDrawerOpen,
 
-      toggleLeftDrawer () {
+      toggleLeftDrawer() {
         leftDrawerOpen.value = !leftDrawerOpen.value
       },
-      async logout () {
+      async logout() {
         await authStore.logout()
         await router.push({ name: 'login' })
-      }
+      },
     }
-  }
+  },
 })
 </script>

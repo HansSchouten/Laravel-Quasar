@@ -1,14 +1,13 @@
-import {defineStore} from 'pinia'
+import { defineStore } from 'pinia'
 
 export const useLayoutStore = defineStore('layout', {
-
   state: () => ({
-    layout: null
+    layout: null,
   }),
 
   actions: {
     setLayout(layout) {
       this.layout = layout
-    }
-  }
+    },
+  },
 })
