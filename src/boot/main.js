@@ -1,6 +1,6 @@
 import { boot } from 'quasar/wrappers'
 import { createPinia } from 'pinia'
-import { HasError } from 'vform/src/components/bootstrap5'
+import HasError from 'components/HasError.vue'
 import AlertSuccess from 'components/AlertSuccess.vue'
 
 export default boot(async ({ app, router, store }) => {
