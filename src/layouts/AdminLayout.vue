@@ -15,7 +15,7 @@
           <q-avatar>
             <img src="/logo.png" />
           </q-avatar>
-          <q-toolbar-title>
+          <q-toolbar-title class="gt-xs">
             {{ appName }}
           </q-toolbar-title>
         </q-btn>
