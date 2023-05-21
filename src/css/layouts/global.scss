@@ -6,8 +6,3 @@ a {
   text-decoration: none;
   color: inherit;
 }
-
-/* fix confetti z-index */
-body > canvas:last-of-type {
-    z-index: 100000 !important;
-}

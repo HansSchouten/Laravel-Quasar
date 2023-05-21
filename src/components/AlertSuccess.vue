@@ -1,5 +1,9 @@
 <template>
-  <q-banner v-if="form.successful" inline-actions class="text-white bg-green">
+  <q-banner
+    v-if="form.successful"
+    inline-actions
+    class="text-white bg-green"
+  >
     {{ message }}
     <template v-if="dismissible" v-slot:action>
       <q-btn flat color="white" :label="$t('Dismiss')" @click="dismiss" />
