@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <q-ajax-bar />
+    <loading ref="loading"/>
 
     <div v-if="layout" :id="'layout-' + layout">
       <component :is="layoutComponents[layout]">
@@ -11,6 +11,7 @@
 </template>
 
 <script>
+import Loading from 'components/Loading.vue'
 import { defineComponent } from 'vue'
 import { useLayoutStore } from 'stores/layout'
 
@@ -29,6 +30,10 @@ export default defineComponent({
   el: '#app',
   name: 'App',
 
+  components: {
+    Loading,
+  },
+
   data: () => ({
     layout: 'loading', // set null to disable loading screen
     layoutComponents: layoutComponents,
@@ -40,6 +45,10 @@ export default defineComponent({
     layoutStore.$subscribe((mutation, state) => {
       this.setLayout(state.layout)
     })
+  },
+
+  mounted() {
+    window.$loading = this.$refs.loading
   },
 
   methods: {

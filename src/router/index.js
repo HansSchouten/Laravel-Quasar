@@ -50,6 +50,11 @@ export default route(function (/* { store, ssrContext } */) {
       return next()
     }
 
+    // Start the loading bar.
+    if (components[components.length - 1].loading !== false) {
+      window.$loading.start()
+    }
+
     const middleware = getMiddleware(components)
 
     // Call each middleware.
@@ -69,7 +74,9 @@ export default route(function (/* { store, ssrContext } */) {
     })
   }
 
-  async function afterEach(to, from, next) {}
+  async function afterEach(to, from, next) {
+    window.$loading.finish()
+  }
 
   async function callMiddleware(middleware, to, from, next) {
     const stack = middleware.reverse()
@@ -78,7 +85,7 @@ export default route(function (/* { store, ssrContext } */) {
       // Stop if "_next" was called with an argument or the stack is empty.
       if (args.length > 0 || stack.length === 0) {
         if (args.length > 0) {
-          //Router.app.$loading.finish()
+          window.$loading.finish()
         }
 
         return next(...args)
