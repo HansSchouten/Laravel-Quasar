@@ -31,4 +31,4 @@ ln -s ../Laravel-Quasar/dist/spa public_html
 ---
 ![Login screen](https://github.com/HansSchouten/Laravel-Quasar/assets/5946444/96939012-309c-4817-a124-0f26e24f627e)
 
-![Profile settings](https://github.com/HansSchouten/Laravel-Quasar/assets/5946444/0a2c67df-5d4d-4e3b-97db-19a19581186e)
+![Profile settings](https://github.com/HansSchouten/Laravel-Quasar/assets/5946444/3596f142-5ee1-40e4-834b-8e319a62fd1f)
