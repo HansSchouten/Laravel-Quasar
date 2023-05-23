@@ -8,7 +8,7 @@
           round
           icon="menu"
           aria-label="Menu"
-          @click="toggleLeftDrawer"
+          @click="drawerStore.toggleLeftDrawer()"
         />
 
         <q-btn flat no-caps stretch :to="{ name: 'dashboard' }" class="q-ml-sm">
@@ -51,9 +51,7 @@
     </q-header>
 
     <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
-      <q-list>
-        <q-item-label header></q-item-label>
-      </q-list>
+      <drawer />
     </q-drawer>
 
     <q-page-container>
@@ -66,18 +64,17 @@
 import { useAuthStore } from 'stores/auth'
 import { useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
-import { ref } from 'vue'
+import Drawer from 'components/Drawer.vue'
+import { useDrawerStore } from 'stores/drawer'
 
 const router = useRouter()
 const appName = window.appName
-const leftDrawerOpen = ref(false)
+
+const drawerStore = useDrawerStore()
+const { leftDrawerOpen } = storeToRefs(drawerStore)
 
 const authStore = useAuthStore()
 const { user } = storeToRefs(authStore)
-
-function toggleLeftDrawer() {
-  leftDrawerOpen.value = !leftDrawerOpen.value
-}
 
 async function logout() {
   await authStore.logout()
